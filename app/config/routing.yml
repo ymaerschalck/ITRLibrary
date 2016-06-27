@@ -1,0 +1,4 @@
+itr_library:
+    resource: "@ITRLibraryBundle/Controller/"
+    type:     annotation
+    prefix:   /

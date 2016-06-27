@@ -1,0 +1,57 @@
+{% extends 'ITRLibraryBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>Library</h1>
+
+    <div class="margin-20">
+        Sorteren op:
+        <div class="btn-group sortable" role="group">
+            <span class="btn btn-default{% if pagination.isSorted('p.title') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Titel', 'p.title') }}</span>
+            <span class="btn btn-default{% if pagination.isSorted('p.writtenAt') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Geschreven', 'p.writtenAt') }}</span>
+            <span class="btn btn-default{% if pagination.isSorted('p.createdAt') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Toegevoegd', 'p.createdAt') }}</span>
+            <span class="btn btn-default{% if pagination.isSorted('p.votes') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Votes', 'p.votes') }}</span>
+        </div>
+
+        <div class="pull-right">
+            <a href="{{ path('post_new') }}" class="btn btn-primary">Post toevoegen</a>
+        </div>
+    </div>
+
+    <table class="table table-hover table-reddit">
+        {% set queryData = app.request.query.all() %}
+        {% for post in pagination %}
+            {% set queryData = queryData|merge({'id': post.id}) %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td class="text-center voter-wrapper">
+                    <a class="voter {% if app.request.cookies.get(post.getHash()) == 1 %}active{% endif %}" {% if app.request.cookies.get(post.getHash()) != 1 %}href="{{ path('post_upvote', queryData) }}"{% endif %}>
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                    </a>
+                    <div class="score">{{ post.votes }}</div>
+                    <a class="voter {% if app.request.cookies.get(post.getHash()) == -1 %}active{% endif %}" {% if app.request.cookies.get(post.getHash()) != -1 %}href="{{ path('post_downvote', queryData) }}"{% endif %}>
+                        <span class="glyphicon glyphicon-arrow-down"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ post.url }}"><h3>{{ post.title }} {% if post.writtenAt %}({{ post.writtenAt | date('d-m-Y') }}){% endif %}</h3></a>
+                    <small>
+                        Toegevoegd op {{ post.createdAt | date('d-m-Y') }}
+                        {% for tag in post.tags %}
+                            {% if loop.first %} - {% endif %}
+                            <span class="label label-primary">{{ tag }}</span>
+                        {% endfor %}
+                    </small>
+                </td>
+                <td class="actions text-right">
+                    <a href="{{ path('post_edit', {'id': post.id}) }}"><small class="glyphicon glyphicon-pencil"></small></a>
+                    <a data-url="{{ path('post_delete', {'id': post.id}) }}" class="js-modal-toggle" data-toggle="modal" data-target="#confirmDelete" data-title="Delete post" data-message="Ben je zeker dat je deze post wil verwijderen?">
+                        <small class="glyphicon glyphicon-trash"></small>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

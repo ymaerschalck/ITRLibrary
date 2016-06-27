@@ -1,0 +1,7 @@
+services:
+    itrlibrary.form.type.post:
+        class: ITRLibraryBundle\Form\PostType
+        arguments:
+            - '@doctrine.orm.entity_manager'
+        tags:
+            - { name: form.type }

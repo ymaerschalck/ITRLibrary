@@ -1,0 +1,70 @@
+body {
+  padding-top: 70px;
+}
+
+.logo {
+  height: 27px;
+}
+
+table.table-reddit {
+  h3 {
+    margin: 5px 0;
+  }
+
+  td {
+    border-top: none !important;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+table td.voter-wrapper {
+  width: 30px;
+  padding: 10px 20px !important;
+
+  .voter {
+    color: grey;
+    text-decoration: none;
+    cursor: pointer;
+
+    &.active, &:hover {
+      color: #2FA4E7;
+    }
+  }
+}
+
+.margin-20 {
+  margin: 20px;
+}
+
+.sortable {
+  a.desc {
+     &:before {
+       //.glyphicon-chevron-down
+       position: relative;
+      top: 1px;
+      display: inline-block;
+      font-family: 'Glyphicons Halflings';
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+       content: "\e114";
+     }
+  }
+  a.asc {
+    &:before {
+      //.glyphicon-chevron-up
+      position: relative;
+      top: 1px;
+      display: inline-block;
+      font-family: 'Glyphicons Halflings';
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      content: "\e113";
+    }
+  }
+}

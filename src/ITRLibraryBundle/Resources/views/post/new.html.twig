@@ -1,0 +1,15 @@
+{% extends 'ITRLibraryBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>
+        Post toevoegen
+        <div class="pull-right">
+            <a class="btn btn-info" href="{{ path('post_index') }}">Back to the list</a>
+        </div>
+    </h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-primary" value="Opslaan" />
+    {{ form_end(form) }}
+{% endblock %}

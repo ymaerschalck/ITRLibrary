@@ -1,0 +1,6 @@
+# Add a line to your hosts file.
+# This must match the values for GUEST_IP and APP_DOMAIN set in run.sh
+192.168.33.79 itrlibrary.dev.intracto.com
+192.168.33.79 phpmyadmin.itrlibrary.dev.intracto.com
+192.168.33.79 mailcatcher.itrlibrary.dev.intracto.com
+192.168.33.79 roundcube.itrlibrary.dev.intracto.com

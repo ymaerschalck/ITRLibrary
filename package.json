@@ -1,0 +1,17 @@
+{
+  "name": "ITRLibrary",
+  "version": "1.0.0",
+  "private": true,
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "~1.3",
+    "gulp": "^3.8.8",
+    "gulp-concat": "^2.3.4",
+    "gulp-minify-css": "~0.3.0",
+    "gulp-plumber": "^0.6.4",
+    "gulp-ruby-sass": "~0.3.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-rename": "~1.0.0"
+  }
+}

@@ -1,0 +1,18 @@
+{% extends 'ITRLibraryBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>
+        Editeren
+        <div class="pull-right">
+            <a class="btn btn-info" href="{{ path('post_index') }}">Back to the list</a>
+            <a class="btn btn-warning" data-url="{{ path('post_delete', {'id': post.id}) }}" class="js-modal-toggle" data-toggle="modal" data-target="#confirmDelete" data-title="Delete post" data-message="Ben je zeker dat je deze post wil verwijderen?">
+                Delete
+            </a>
+        </div>
+    </h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input type="submit" class="btn btn-primary" value="Opslaan" />
+    {{ form_end(edit_form) }}
+{% endblock %}
