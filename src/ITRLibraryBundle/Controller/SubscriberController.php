@@ -46,6 +46,7 @@ class SubscriberController extends Controller
                 $this->addFlash('danger', $error->getMessage());
             }
         }
+
         return $this->redirectToRoute('post_index');
     }
 }

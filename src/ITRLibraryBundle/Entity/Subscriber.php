@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Subscriber
+ * Subscriber.
  *
  * @ORM\Table(name="subscriber")
  * @ORM\Entity(repositoryClass="ITRLibraryBundle\Repository\SubscriberRepository")
@@ -37,7 +37,7 @@ class Subscriber
     private $email;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -62,4 +62,3 @@ class Subscriber
         $this->email = $email;
     }
 }
-
