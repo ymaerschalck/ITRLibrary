@@ -34,6 +34,7 @@ class PostController extends Controller
         $value = $request->query->get('value', false);
         if ($value) {
             $qb->where($qb->expr()->like('p.title', ':value'));
+            $qb->where($qb->expr()->like('p.url', ':value'));
             $qb->orWhere($qb->expr()->like('t.name', ':value'));
             $qb->setParameter('value', '%'.$value.'%');
         }
