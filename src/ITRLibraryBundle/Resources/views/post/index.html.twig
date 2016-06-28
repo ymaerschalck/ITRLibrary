@@ -1,24 +1,37 @@
 {% extends 'ITRLibraryBundle::layout.html.twig' %}
 
 {% block content %}
+    {% set queryData = app.request.query.all() %}
     <h1>Library</h1>
 
-    <div class="margin-20">
-        Sorteren op:
-        <div class="btn-group sortable" role="group">
-            <span class="btn btn-default{% if pagination.isSorted('p.title') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Titel', 'p.title') }}</span>
-            <span class="btn btn-default{% if pagination.isSorted('p.writtenAt') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Geschreven', 'p.writtenAt') }}</span>
-            <span class="btn btn-default{% if pagination.isSorted('p.createdAt') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Toegevoegd', 'p.createdAt') }}</span>
-            <span class="btn btn-default{% if pagination.isSorted('p.votes') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Votes', 'p.votes') }}</span>
+    <div class="row margin-20">
+        <div class="col-lg-6">
+            Sorteren op:
+            <div class="btn-group sortable" role="group">
+                <span class="btn btn-link{% if pagination.isSorted('p.title') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Titel', 'p.title') }}</span>
+                <span class="btn btn-link{% if pagination.isSorted('p.writtenAt') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Geschreven', 'p.writtenAt') }}</span>
+                <span class="btn btn-link{% if pagination.isSorted('p.createdAt') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Toegevoegd', 'p.createdAt') }}</span>
+                <span class="btn btn-link{% if pagination.isSorted('p.votes') %} active{% endif %}">{{ knp_pagination_sortable(pagination, ' Votes', 'p.votes') }}</span>
+            </div>
+        </div><!-- /.col-lg-6 -->
+        <div class="col-lg-4">
+            <form method="GET">
+                <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Zoek naar..." name="value">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Zoeken</button>
+                        </span>
+                </div><!-- /input-group -->
+            </form>
         </div>
-
-        <div class="pull-right">
-            <a href="{{ path('post_new') }}" class="btn btn-primary">Post toevoegen</a>
-        </div>
-    </div>
+        <div class="col-lg-2">
+            <div class="pull-right">
+                <a href="{{ path('post_new') }}" class="btn btn-primary">Post toevoegen</a>
+            </div>
+        </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
 
     <table class="table table-hover table-reddit">
-        {% set queryData = app.request.query.all() %}
         {% for post in pagination %}
             {% set queryData = queryData|merge({'id': post.id}) %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>

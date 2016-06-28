@@ -26,12 +26,21 @@ class PostController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->get('doctrine.orm.entity_manager');
-        $dql = 'SELECT p, t FROM ITRLibraryBundle:Post p LEFT JOIN p.tags t';
-        $query = $em->createQuery($dql);
+        $qb = $em->createQueryBuilder();
+        $qb->select(['p', 't'])
+            ->from('ITRLibraryBundle:Post', 'p')
+            ->leftJoin('p.tags', 't');
+
+        $value = $request->query->get('value', false);
+        if ($value) {
+            $qb->where($qb->expr()->like('p.title', ':value'));
+            $qb->orWhere($qb->expr()->like('t.name', ':value'));
+            $qb->setParameter('value', '%'.$value.'%');
+        }
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $query,
+            $qb->getQuery(),
             $request->query->getInt('page', 1),
             10
         );
