@@ -10,4 +10,4 @@ services:
         arguments:
             - '@cl_slack.api_client'
         tags:
-            - { name: kernel.event_listener, event: post.pre_create, method: sendSlackMessage }
+            - { name: kernel.event_listener, event: post.post_create, method: sendSlackMessage }
