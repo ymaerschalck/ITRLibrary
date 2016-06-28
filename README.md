@@ -5,3 +5,6 @@ A simple symfony project to setup a reddit like way of sharing blogposts for int
 
 ![alt text](https://raw.githubusercontent.com/pix-art/ITRLibrary/master/src/ITRLibraryBundle/Resources/public/img/example.png "Intracto Library")
 
+Update 28-06-2016:
+- Added slack integration
+- Added search functionality
