@@ -8,10 +8,10 @@
         <div class="col-lg-6">
             Sorteren op:
             <div class="btn-group sortable" role="group">
-                <span class="btn btn-link{% if pagination.isSorted('p.title') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, 'Titel', 'p.title') }}</span>
-                <span class="btn btn-link{% if pagination.isSorted('p.writtenAt') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, 'Geschreven', 'p.writtenAt') }}</span>
-                <span class="btn btn-link{% if pagination.isSorted('p.createdAt') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, 'Toegevoegd', 'p.createdAt') }}</span>
-                <span class="btn btn-link{% if pagination.isSorted('p.votes') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, 'Votes', 'p.votes') }}</span>
+                <span class="btn btn-link{% if pagination.isSorted('p.title') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, ' Titel', 'p.title') }}</span>
+                <span class="btn btn-link{% if pagination.isSorted('p.writtenAt') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, ' Geschreven', 'p.writtenAt') }}</span>
+                <span class="btn btn-link{% if pagination.isSorted('p.createdAt') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, ' Toegevoegd', 'p.createdAt') }}</span>
+                <span class="btn btn-link{% if pagination.isSorted('p.votes') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, ' Votes', 'p.votes') }}</span>
             </div>
         </div><!-- /.col-lg-6 -->
         <div class="col-lg-4">

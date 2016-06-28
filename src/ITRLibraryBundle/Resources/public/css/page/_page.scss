@@ -36,6 +36,14 @@ table td.voter-wrapper {
   margin: 20px 0;
 }
 
+.btn-link.active {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  a {
+    color: #157ab5;
+  }
+}
+
 .sortable {
   a.desc {
      &:before {

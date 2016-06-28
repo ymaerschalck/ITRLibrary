@@ -1334,5 +1334,7 @@ table td.voter-wrapper{width:30px;padding:10px 20px!important}
 table td.voter-wrapper .voter{color:grey;text-decoration:none;cursor:pointer}
 table td.voter-wrapper .voter.active,table td.voter-wrapper .voter:hover{color:#2FA4E7}
 .margin-20{margin:20px 0}
+.btn-link.active{-webkit-box-shadow:none;box-shadow:none}
+.btn-link.active a{color:#157ab5}
 .sortable a.desc:before{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;content:"\e114"}
 .sortable a.asc:before{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;content:"\e113"}
