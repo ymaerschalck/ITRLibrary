@@ -75,3 +75,6 @@ knp_paginator:
     template:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
+
+cl_slack:
+    api_token: "%slack.token%"

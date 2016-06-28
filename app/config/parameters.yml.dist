@@ -10,3 +10,4 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: 5eaafed90559aa5929ad50fd535c155fba623e57
+    slack.token: InsertYourTokenHere

@@ -87,6 +87,7 @@ class Post
     {
         $this->createdAt = new \DateTime();
         $this->votes = 1;
+        $this->tags = new ArrayCollection();
     }
 
     public function vote($add)
@@ -97,6 +98,15 @@ class Post
     public function getHash()
     {
         return md5($this->title);
+    }
+
+    public function tagList()
+    {
+        if (empty($this->tags)) {
+            return false;
+        }
+
+        return implode(", ", $this->tags->toArray());
     }
 
     /**

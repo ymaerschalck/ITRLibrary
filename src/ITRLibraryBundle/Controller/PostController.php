@@ -2,6 +2,8 @@
 
 namespace ITRLibraryBundle\Controller;
 
+use ITRLibraryBundle\Events\PostEvent;
+use ITRLibraryBundle\Events\PostEvents;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -64,9 +66,16 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $dispatcher = $this->get('event_dispatcher');
+            $event = new PostEvent($post);
+
+            $dispatcher->dispatch(PostEvents::PRE_CREATE, $event);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
+
+            $dispatcher->dispatch(PostEvents::POST_CREATE, $event);
 
             return $this->redirectToRoute('post_index');
         }
