@@ -8,7 +8,6 @@ use ITRLibraryBundle\Entity\Post;
 use ITRLibraryBundle\Entity\Tag;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -40,7 +39,7 @@ class PostType extends AbstractType
             ->add('url')
             ->add('writtenAt', DateType::class, [
                 'placeholder' => [
-                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day'
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
                 ],
                 'format' => 'ddMMyyyy',
                 'required' => false,

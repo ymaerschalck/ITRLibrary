@@ -106,7 +106,7 @@ class Post
             return false;
         }
 
-        return implode(", ", $this->tags->toArray());
+        return implode(', ', $this->tags->toArray());
     }
 
     /**

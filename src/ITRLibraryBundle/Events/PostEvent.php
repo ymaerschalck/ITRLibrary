@@ -35,6 +35,4 @@ class PostEvent extends Event
     {
         $this->post = $post;
     }
-
-
 }
