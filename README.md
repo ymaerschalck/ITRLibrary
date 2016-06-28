@@ -8,3 +8,4 @@ A simple symfony project to setup a reddit like way of sharing blogposts for int
 Update 28-06-2016:
 - Added slack integration
 - Added search functionality
+- Added weekly mail command

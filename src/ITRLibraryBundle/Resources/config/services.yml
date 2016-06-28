@@ -1,4 +1,9 @@
 services:
+    itrlibrary.service.mailer:
+        class: ITRLibraryBundle\Service\MailerService
+        arguments:
+            - '@mailer'
+            - '@twig'
     itrlibrary.form.type.post:
         class: ITRLibraryBundle\Form\PostType
         arguments:

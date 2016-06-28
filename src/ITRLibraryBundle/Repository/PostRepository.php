@@ -10,4 +10,15 @@ namespace ITRLibraryBundle\Repository;
  */
 class PostRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getPostsSince(\DateTime $date)
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('p')
+            ->from('ITRLibraryBundle:Post', 'p')
+            ->where('p.createdAt > :date')
+            ->setParameter('date', $date->format('Y-m-d'));
+
+        return $qb->getQuery()->getResult();
+    }
 }

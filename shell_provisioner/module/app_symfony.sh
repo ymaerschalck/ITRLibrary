@@ -1,15 +1,10 @@
 #!/bin/bash
 
 # Symfony application
-
-cd /vagrant/htdocs
+cd /vagrant
 
 # Install vendors
 composer.phar install
 
-# Build frontend
-cd web/.npm
-npm install
-grunt build
-
-cd -
+php bin/console doc:dat:create
+php bin/console doc:sche:up --force
