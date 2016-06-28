@@ -17,10 +17,10 @@
         <div class="col-lg-4">
             <form method="GET">
                 <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Zoek naar..." name="value" value="{{ app.request.query.get('value') }}">
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="submit">Zoeken</button>
-                        </span>
+                    <input type="text" class="form-control" placeholder="Zoek naar..." name="value" value="{{ app.request.query.get('value') }}">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">Zoeken</button>
+                    </span>
                 </div><!-- /input-group -->
             </form>
         </div>
@@ -67,4 +67,22 @@
     <div class="navigation">
         {{ knp_pagination_render(pagination) }}
     </div>
+
+    {% if not app.request.cookies.has('subscribed') %}
+
+    <div class="row margin-20">
+        <div class="col-lg-offset-6 col-lg-6">
+        {{ form_start(subscribeForm, {'action': path('subscriber_new')}) }}
+            <div class="input-group">
+                {{ form_widget(subscribeForm.email, {'attr': {'placeholder': 'Schrijf je hier in voor onze wekelijkse mail'}}) }}
+                <span class="input-group-btn">
+                    <input class="btn btn-primary" type="submit" value="Subscribe" />
+                </span>
+            </div>
+            {{ form_rest(subscribeForm) }}
+        {{ form_end(subscribeForm) }}
+        </div>
+    </div>
+
+    {% endif %}
 {% endblock %}

@@ -2,8 +2,10 @@
 
 namespace ITRLibraryBundle\Controller;
 
+use ITRLibraryBundle\Entity\Subscriber;
 use ITRLibraryBundle\Events\PostEvent;
 use ITRLibraryBundle\Events\PostEvents;
+use ITRLibraryBundle\Form\SubscriberType;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,6 +29,9 @@ class PostController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $subscriber = new Subscriber();
+        $subscribeForm = $this->createForm(SubscriberType::class, $subscriber);
+
         $em = $this->get('doctrine.orm.entity_manager');
         $qb = $em->createQueryBuilder();
         $qb->select(['p', 't'])
@@ -50,6 +55,7 @@ class PostController extends Controller
 
         return $this->render('ITRLibraryBundle:post:index.html.twig', array(
             'pagination' => $pagination,
+            'subscribeForm' => $subscribeForm->createView(),
         ));
     }
 
