@@ -47,11 +47,13 @@ class PostController extends Controller
             $qb->setParameter('value', '%'.$value.'%');
         }
 
+        $limit = $request->query->get('limit', 10);
+
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $qb->getQuery(),
             $request->query->getInt('page', 1),
-            10
+            $limit
         );
 
         return $this->render('ITRLibraryBundle:post:index.html.twig', array(

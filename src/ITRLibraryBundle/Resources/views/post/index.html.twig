@@ -2,10 +2,15 @@
 
 {% block content %}
     {% set queryData = app.request.query.all() %}
-    <h1>{{ 'library'|trans }}</h1>
+    <h1>
+        {{ 'library'|trans }}
+        <div class="pull-right">
+            <a href="{{ path('post_new') }}" class="btn btn-primary">{{ 'add_post'|trans }}</a>
+        </div>
+    </h1>
 
     <div class="row margin-20">
-        <div class="col-lg-6">
+        <div class="col-lg-5">
             {{ 'sort_by'|trans }}:
             <div class="btn-group sortable" role="group">
                 <span class="btn btn-link{% if pagination.isSorted('p.title') %} active{% endif %}"> {{ knp_pagination_sortable(pagination, 'title'|trans, 'p.title') }}</span>
@@ -15,6 +20,16 @@
             </div>
         </div><!-- /.col-lg-6 -->
         <div class="col-lg-4">
+            {{ 'number_of_rows'|trans }}:
+            <div class="btn-group sortable" role="group">
+                <select name="limit" id="limit-selection" class="form-control" >
+                    {% for limit in [10, 20, 50, 100] %}
+                        <option value="{{ limit }}" {% if app.request.query.get('limit') == limit %}selected{% endif %}>{{ limit }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-lg-3">
             <form method="GET">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="{{ 'search_for'|trans }}" name="value" value="{{ app.request.query.get('value') }}">
@@ -24,11 +39,6 @@
                 </div><!-- /input-group -->
             </form>
         </div>
-        <div class="col-lg-2">
-            <div class="pull-right">
-                <a href="{{ path('post_new') }}" class="btn btn-primary">{{ 'add_post'|trans }}</a>
-            </div>
-        </div><!-- /.col-lg-6 -->
     </div><!-- /.row -->
 
     <div class="row">
@@ -89,4 +99,37 @@
     </div>
 
     {% endif %}
+{% endblock %}
+
+{% block javascript_page_specific %}
+    <script type="text/javascript">
+        $('#limit-selection').on('change', function(){
+            var params = getQueryParams(document.location.search);
+            params.limit = $(this).val();
+            var search = "";
+            for (var key in params) {
+                if (params.hasOwnProperty(key)) {
+                    if (0 !== search.length) {
+                        search += "&";
+                    }
+                    search += key + "=" + params[key];
+                }
+            }
+            document.location.search = search;
+        });
+
+        function getQueryParams(qs) {
+            qs = qs.split('+').join(' ');
+
+            var params = {},
+                    tokens,
+                    re = /[?&]?([^=]+)=([^&]*)/g;
+
+            while (tokens = re.exec(qs)) {
+                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+            }
+
+            return params;
+        }
+    </script>
 {% endblock %}
