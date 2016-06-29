@@ -10,4 +10,15 @@ namespace ITRLibraryBundle\Repository;
  */
 class TagRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findUnusedTags()
+    {
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('t')
+            ->from('ITRLibraryBundle:Tag', 't')
+            ->leftJoin('t.posts', 'p')
+            ->where($qb->expr()->isNull('p.id'));
+
+        return $qb->getQuery()->getResult();
+    }
 }
