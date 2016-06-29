@@ -37,6 +37,7 @@ class PostController extends Controller
         $qb->select(['p', 't'])
            ->from('ITRLibraryBundle:Post', 'p')
            ->leftJoin('p.tags', 't')
+           ->where("p.votes > -5")
            ->orderBy('p.createdAt', 'desc');
 
         $value = $request->query->get('value', false);

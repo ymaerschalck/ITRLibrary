@@ -17,6 +17,7 @@ class PostRepository extends \Doctrine\ORM\EntityRepository
         $qb->select('p')
             ->from('ITRLibraryBundle:Post', 'p')
             ->where('p.createdAt > :date')
+            ->andWhere('p.votes > -5')
             ->setParameter('date', $date->format('Y-m-d'));
 
         return $qb->getQuery()->getResult();
