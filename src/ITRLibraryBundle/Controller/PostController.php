@@ -35,8 +35,9 @@ class PostController extends Controller
         $em = $this->get('doctrine.orm.entity_manager');
         $qb = $em->createQueryBuilder();
         $qb->select(['p', 't'])
-            ->from('ITRLibraryBundle:Post', 'p')
-            ->leftJoin('p.tags', 't');
+           ->from('ITRLibraryBundle:Post', 'p')
+           ->leftJoin('p.tags', 't')
+           ->orderBy('p.createdAt', 'desc');
 
         $value = $request->query->get('value', false);
         if ($value) {
