@@ -1,6 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
     locale: nl
+    session_path: %kernel.root_dir%/sessions
     database_host: 127.0.0.1
     database_port: null
     database_name: symfony
