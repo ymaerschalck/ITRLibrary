@@ -43,6 +43,7 @@ class PostType extends AbstractType
                 ],
                 'format' => 'ddMMyyyy',
                 'required' => false,
+                'years' => range(date("Y"), '1950'),
             ])
             ->add('tags', EntityType::class, array(
                 'class' => Tag::class,
