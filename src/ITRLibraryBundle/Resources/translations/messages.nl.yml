@@ -1,0 +1,20 @@
+library: Library
+sort_by: Sorteren op
+title: Titel
+writtenBy: Geschreven
+createdAt: Aangemaakt
+votes: Stemmen
+search_for: Zoek naar...
+search: Zoeken
+add_post: Post toevoegen
+added_on: Toegevoegd op
+delete_title: Delete post
+delete_message: "Ben je zeker dat je deze post wil verwijderen?"
+subscribe_message: "Schrijf je hier in voor onze wekelijkse mail"
+subscribe: Subscribe
+back_to_index: Terug naar overzicht
+save: Opslaan
+edit_post: Post aanpassen
+delete: Verwijderen
+subscribe_success: Succesvol ingeschreven!
+weekly_mail_title: Jou weekelijkse update

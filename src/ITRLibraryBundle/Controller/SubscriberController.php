@@ -34,7 +34,7 @@ class SubscriberController extends Controller
             $em->persist($subscriber);
             $em->flush();
 
-            $this->addFlash('success', 'Succesvol ingeschreven');
+            $this->addFlash('success', $this->get('translator')->trans('subscribe_success'));
             $response = $this->redirectToRoute('post_index');
             $response->headers->setCookie(new Cookie('subscribed', 1));
 
