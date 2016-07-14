@@ -74,5 +74,7 @@ itr_library:
         bot_name: "LibraryBot"
         default_channel: "library"
         channel_tags:
-            - { channel: symfony, tags: [symfony, development]}
-            - { channel: drupal, tags: [drupal, development]}
+            - { channel: symfony, tags: [symfony]}
+            - { channel: drupal, tags: [drupal]}
+            - { channel: sylius, tags: [sylius]}
+            - { channel: doctrine, tags: [doctrine]}
