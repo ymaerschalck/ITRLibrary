@@ -14,5 +14,6 @@ services:
         class: ITRLibraryBundle\Events\Listener\SlackListener
         arguments:
             - '@cl_slack.api_client'
+            - '%itr_library.slack%'
         tags:
             - { name: kernel.event_listener, event: post.post_create, method: sendSlackMessage }

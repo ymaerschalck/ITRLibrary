@@ -4,6 +4,7 @@ namespace ITRLibraryBundle\Events\Listener;
 
 use CL\Slack\Payload\ChatPostMessagePayload;
 use CL\Slack\Transport\ApiClient;
+use ITRLibraryBundle\Entity\Post;
 use ITRLibraryBundle\Events\PostEvent;
 
 class SlackListener
@@ -11,14 +12,18 @@ class SlackListener
     /* @var ApiClient*/
     private $slackClient;
 
+    private $settings;
+
     /**
      * SlackListener constructor.
      *
      * @param $slackClient
+     * @param $settings
      */
-    public function __construct(ApiClient $slackClient)
+    public function __construct(ApiClient $slackClient, $settings)
     {
         $this->slackClient = $slackClient;
+        $this->settings = $settings;
     }
 
     public function sendSlackMessage(PostEvent $event)
@@ -35,11 +40,30 @@ class SlackListener
         }
 
         $payload = new ChatPostMessagePayload();
-        $payload->setChannel('#library');
-        $payload->setText($message);  // also supports Slack formatting
-        $payload->setUsername('LibraryBot');
+        $payload->setText($message);
+        $payload->setUsername($this->settings['bot_name']);
         $payload->setIconEmoji('books');
 
-        $this->slackClient->send($payload);
+        $channels = $this->getPushableChannels($post);
+
+        foreach ($channels as $channel) {
+            $payload->setChannel($channel);
+            $this->slackClient->send($payload);
+        }
+    }
+
+    private function getPushableChannels(Post $post)
+    {
+        $pushableChannels = [$this->settings['default_channel']];
+
+        foreach ($post->getTags() as $tag) {
+            foreach ($this->settings['channel_tags'] as $channel_tag) {
+                if (in_array($tag->getName(), $channel_tag['tags']) && !in_array($channel_tag['channel'], $pushableChannels)) {
+                    $pushableChannels[] = $channel_tag['channel'];
+                }
+            }
+        }
+
+        return $pushableChannels;
     }
 }
