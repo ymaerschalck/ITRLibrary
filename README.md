@@ -9,3 +9,15 @@ Update 28-06-2016:
 - Added slack integration
 - Added search functionality
 - Added weekly mail command
+
+Update 14-07-2016:
+- Added extra configuration for slack listener, you can now push certain tags to more channels
+
+```
+itr_library:
+    slack:
+        bot_name: "LibraryBot"
+        default_channel: "library"
+        channel_tags:
+            - { channel: <channel>, tags: [<tag>, <tag>]}
+```            
