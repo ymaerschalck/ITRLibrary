@@ -28,8 +28,11 @@ class WeeklyMailCommand extends ContainerAwareCommand
 
         $posts = $em->getRepository('ITRLibraryBundle:Post')->getPostsSince($sevenDaysAgo);
 
-        $subscribers = $em->getRepository('ITRLibraryBundle:Subscriber')->findAll();
+        if (!empty($posts)) {
+            $subscribers = $em->getRepository('ITRLibraryBundle:Subscriber')->findAll();
 
-        $this->getContainer()->get('itrlibrary.service.mailer')->sendPostsToSubscribers($posts, $subscribers);
+            $this->getContainer()->get('itrlibrary.service.mailer')->sendPostsToSubscribers($posts, $subscribers);
+        }
+
     }
 }
