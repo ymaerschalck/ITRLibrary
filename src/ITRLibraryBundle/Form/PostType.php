@@ -73,7 +73,7 @@ class PostType extends AbstractType
             }
 
             $newTag = new Tag();
-            $newTag->setName($tag);
+            $newTag->setName(strtolower($tag));
             $this->em->persist($newTag);
             $this->em->flush();
 

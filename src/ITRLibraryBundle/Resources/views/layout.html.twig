@@ -38,13 +38,13 @@
     <div class="container">
         {% for flashMessage in app.session.flashbag.get('success') %}
             <div class="alert alert-success alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close'|trans }}</span></button>
                 <strong>Success!</strong> {{ flashMessage }}
             </div>
         {% endfor %}
         {% for flashMessage in app.session.flashbag.get('danger') %}
             <div class="alert alert-danger alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ 'close'|trans }}</span></button>
                 <strong>Error!</strong> {{ flashMessage }}
             </div>
         {% endfor %}
@@ -58,14 +58,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Delete</h4>
+                    <h4 class="modal-title">{{ 'delete'|trans }}</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Ben je hier zeker van ?</p>
+                    <p>{{ 'are_you_sure'|trans }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="confirm">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'cancel'|trans }}</button>
+                    <button type="button" class="btn btn-danger" id="confirm">{{ 'delete'|trans }}</button>
                 </div>
             </div>
         </div>
@@ -82,7 +82,24 @@
     {% block javascript_bottom %}
         <!-- Dialog show event handler -->
         <script type="text/javascript">
-            $(".js-select2").select2({tags: true});
+            $(".js-select2").select2({
+                tags: true,
+                createTag: function (tag) {
+                    found = false;
+                    $(".js-select2 option").each(function() {
+                        if ($.trim(tag.term).toUpperCase() == $.trim($(this).text()).toUpperCase()) {
+                            found = true;
+                        }
+                    });
+                    if (!found) {
+                        return {
+                            id: tag.term,
+                            text: tag.term + " ({{ 'new'|trans }})",
+                            isNew: true
+                        };
+                    }
+                }
+            });
             $('#confirmDelete').on('show.bs.modal', function (e) {
                 $message = $(e.relatedTarget).attr('data-message');
                 $(this).find('.modal-body p').text($message);

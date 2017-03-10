@@ -28,13 +28,6 @@ class Tag
      */
     private $name;
 
-    /**
-     * @var Post[]
-     *
-     * @ORM\ManyToMany(targetEntity="Post", mappedBy="tags")
-     */
-    private $posts;
-
     public function __toString()
     {
         return $this->name;
