@@ -24,7 +24,7 @@
             <div class="btn-group sortable" role="group">
                 <select name="limit" id="limit-selection" class="form-control" >
                     {% for limit in [10, 20, 50, 100] %}
-                        <option value="{{ limit }}" {% if app.request.query.get('limit') == limit %}selected{% endif %}>{{ limit }}</option>
+                        <option value="{{ limit }}" {% if currentLimit == limit %}selected{% endif %}>{{ limit }}</option>
                     {% endfor %}
                 </select>
             </div>

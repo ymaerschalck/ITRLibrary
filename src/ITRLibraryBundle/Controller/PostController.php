@@ -31,6 +31,8 @@ class PostController extends Controller
     {
         $subscriber = new Subscriber();
         $subscribeForm = $this->createForm(SubscriberType::class, $subscriber);
+        $cookieLimit = $request->cookies->getInt('limit', 10);
+        $limit = $request->query->getInt('limit', $cookieLimit);
 
         $em = $this->get('doctrine.orm.entity_manager');
         $qb = $em->createQueryBuilder();
@@ -48,7 +50,6 @@ class PostController extends Controller
             $qb->setParameter('value', '%'.$value.'%');
         }
 
-        $limit = $request->query->get('limit', 10);
 
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
@@ -57,10 +58,17 @@ class PostController extends Controller
             $limit
         );
 
-        return $this->render('ITRLibraryBundle:post:index.html.twig', array(
+        $response = $this->render('ITRLibraryBundle:post:index.html.twig', array(
             'pagination' => $pagination,
             'subscribeForm' => $subscribeForm->createView(),
+            'currentLimit' => $limit
         ));
+
+        if ($limit <> $cookieLimit) {
+            $response->headers->setCookie(new Cookie('limit', $limit));
+        }
+
+        return $response;
     }
 
     /**
