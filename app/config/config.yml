@@ -78,3 +78,5 @@ itr_library:
             - { channel: drupal, tags: [drupal]}
             - { channel: sylius, tags: [sylius]}
             - { channel: doctrine, tags: [doctrine]}
+            - { channel: dotnet, tags: [dotnet]}
+
